@@ -2,15 +2,6 @@ function onAuthChange() {
   refreshAuthUI();
 }
 
-function switchTab(tabName) {
-  document.querySelectorAll('.tab-btn').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.tab === tabName);
-  });
-  document.querySelectorAll('.tab-panel').forEach((panel) => {
-    panel.classList.toggle('active', panel.id === `tab-${tabName}`);
-  });
-}
-
 function escapeHtml(str) {
   return String(str ?? '').replace(/[&<>"']/g, (c) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -83,7 +74,6 @@ function startEdit(id) {
   document.getElementById('form-title').textContent = '기록 수정';
   document.getElementById('submit-btn').textContent = '수정 완료';
   document.getElementById('cancel-edit-btn').style.display = 'inline-block';
-  switchTab('write');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -169,10 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
   populateStaticOptions();
   refreshAuthUI();
 
-  document.querySelectorAll('.tab-btn').forEach((btn) => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
-  });
-
   document.getElementById('genre').addEventListener('change', (e) => {
     document.getElementById('genre-custom-field').style.display = e.target.value === '기타' ? 'block' : 'none';
   });
@@ -204,13 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resetForm();
     renderList();
-    switchTab('list');
   });
 
-  document.getElementById('cancel-edit-btn').addEventListener('click', () => {
-    resetForm();
-    switchTab('list');
-  });
+  document.getElementById('cancel-edit-btn').addEventListener('click', resetForm);
   document.getElementById('search-input').addEventListener('input', renderList);
   document.getElementById('filter-genre').addEventListener('change', renderList);
   document.getElementById('sort-select').addEventListener('change', renderList);
