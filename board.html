@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>게시판 - 영화 기록</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="nav-brand" href="index.html">🎬 영화 기록</a>
+    <nav class="nav-links">
+      <a href="index.html">소개</a>
+      <a href="board.html" class="active">게시판</a>
+      <a href="wishlist.html">볼 영화 목록</a>
+      <a href="login.html">로그인</a>
+    </nav>
+    <div class="nav-auth" id="nav-auth"></div>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="page-title">게시판</h1>
+  <p class="page-sub">본 영화를 등록하고 목록으로 확인합니다. 열람은 누구나, 등록·수정·삭제는 작성자만 가능합니다.</p>
+
+  <section class="panel" id="write-panel" style="display:none;">
+    <h2 id="form-title">새 기록 작성</h2>
+    <form id="movie-form">
+      <input type="hidden" id="editing-id" value="">
+      <div class="form-grid">
+        <div class="field span-2">
+          <label for="title">영화 제목 *</label>
+          <input type="text" id="title" required maxlength="80">
+        </div>
+        <div class="field">
+          <label for="watchDate">시청일자 *</label>
+          <input type="date" id="watchDate" required>
+        </div>
+        <div class="field">
+          <label for="rating">평점 (10점 만점) *</label>
+          <select id="rating" required>
+            <option value="">선택</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="genre">장르 *</label>
+          <select id="genre" required></select>
+        </div>
+        <div class="field" id="genre-custom-field" style="display:none;">
+          <label for="genreCustom">장르 직접 입력</label>
+          <input type="text" id="genreCustom" maxlength="20">
+        </div>
+        <div class="field span-2">
+          <label for="oneLiner">한줄평 (목록에 바로 노출)</label>
+          <input type="text" id="oneLiner" maxlength="60" placeholder="예: 배우들 연기가 압도적이었다">
+        </div>
+        <div class="field span-2">
+          <label for="content">감상평</label>
+          <textarea id="content" rows="5" placeholder="자세한 감상을 남겨보세요"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="primary" id="submit-btn">등록하기</button>
+      <button type="button" id="cancel-edit-btn" style="display:none;">취소</button>
+    </form>
+  </section>
+
+  <p class="author-only-note" id="guest-note" style="display:none;">
+    읽기 전용 모드입니다. 기록을 등록하려면 <a href="login.html">로그인</a>하세요.
+  </p>
+
+  <div class="toolbar">
+    <input type="text" id="search-input" placeholder="제목으로 검색">
+    <select id="filter-genre">
+      <option value="">전체 장르</option>
+    </select>
+    <select id="sort-select">
+      <option value="dateDesc">시청일자 최신순</option>
+      <option value="dateAsc">시청일자 오래된순</option>
+      <option value="ratingDesc">평점 높은순</option>
+      <option value="ratingAsc">평점 낮은순</option>
+    </select>
+  </div>
+
+  <div class="movie-list" id="movie-list"></div>
+  <p class="empty-msg" id="empty-msg" style="display:none;">등록된 기록이 없습니다.</p>
+</main>
+
+<footer class="site-footer">개인 영화 기록 사이트</footer>
+
+<script src="js/auth.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/board.js"></script>
+</body>
+</html>

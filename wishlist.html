@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>볼 영화 목록 - 영화 기록</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="nav-brand" href="index.html">🎬 영화 기록</a>
+    <nav class="nav-links">
+      <a href="index.html">소개</a>
+      <a href="board.html">게시판</a>
+      <a href="wishlist.html" class="active">볼 영화 목록</a>
+      <a href="login.html">로그인</a>
+    </nav>
+    <div class="nav-auth" id="nav-auth"></div>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="page-title">볼 영화 목록</h1>
+  <p class="page-sub">아직 보지 않은 영화를 미리 등록해두고, 시청을 완료하면 게시판 기록으로 전환합니다.</p>
+
+  <section class="panel" id="write-panel" style="display:none;">
+    <h2>새 영화 등록</h2>
+    <form id="wish-form">
+      <div class="form-grid">
+        <div class="field">
+          <label for="wishTitle">영화 제목 *</label>
+          <input type="text" id="wishTitle" required maxlength="80">
+        </div>
+        <div class="field">
+          <label for="wishGenre">장르</label>
+          <select id="wishGenre"></select>
+        </div>
+        <div class="field span-2">
+          <label for="wishMemo">메모 (선택)</label>
+          <input type="text" id="wishMemo" maxlength="100" placeholder="예: 친구 추천, 예고편 인상적">
+        </div>
+      </div>
+      <button type="submit" class="primary">목록에 추가</button>
+    </form>
+  </section>
+
+  <p class="author-only-note" id="guest-note" style="display:none;">
+    읽기 전용 모드입니다. 볼 영화를 등록하려면 <a href="login.html">로그인</a>하세요.
+  </p>
+
+  <div class="wish-list" id="wish-list"></div>
+  <p class="empty-msg" id="empty-msg" style="display:none;">등록된 영화가 없습니다.</p>
+</main>
+
+<footer class="site-footer">개인 영화 기록 사이트</footer>
+
+<script src="js/auth.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/wishlist.js"></script>
+</body>
+</html>
